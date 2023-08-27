@@ -31,6 +31,18 @@ local plug_map = {
 	end):with_expr(),
 
 	-- Plugin: comment.nvim
+	["n|<A-/>"] = map_callback(function()
+			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
+				or et("<Plug>(comment_toggle_linewise_count)")
+		end)
+		:with_silent()
+		:with_noremap()
+		:with_expr()
+		:with_desc("edit: Toggle comment for line"),
+	["x|<A-/>"] = map_cmd("<Plug>(comment_toggle_linewise_visual)")
+		:with_silent()
+		:with_noremap()
+		:with_desc("edit: Toggle comment for line with selection"),
 	["n|gcc"] = map_callback(function()
 			return vim.v.count == 0 and et("<Plug>(comment_toggle_linewise_current)")
 				or et("<Plug>(comment_toggle_linewise_count)")
@@ -86,7 +98,8 @@ local plug_map = {
 	["i|<A-h>"] = map_cmd("<Plug>(TaboutBackMulti)"):with_silent():with_noremap():with_desc("edit: Goto begin of pair"),
 
 	-- Plugin suda.vim
-	["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
+	-- ["n|<A-s>"] = map_cu("SudaWrite"):with_silent():with_noremap():with_desc("editn: Save file using sudo"),
+	["n|<A-s>"] = map_cr("w"):with_silent():with_noremap():with_desc("Save file"),
 }
 
 bind.nvim_load_mapping(plug_map)

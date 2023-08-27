@@ -112,6 +112,8 @@ local clipboard_config = function()
 			},
 			cache_enabled = 0,
 		}
+	else
+		-- vim.o.clipboard = "unnamedplus" -- 设置和系统剪切板打通 报错需先sudo pacman -S xclip
 	end
 end
 
